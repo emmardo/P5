@@ -227,8 +227,8 @@ public class MedicalRecordServiceTest {
 
         //Arrange
         assertEquals(newBirthDate, record.getBirthdate());
-        assertEquals(secondMedication, service.getMedicalRecord(firstName, lastName).getMedications().get(3));
-        assertEquals(firstAllergy, service.getMedicalRecord(firstName, lastName).getAllergies().get(2));
+        assertEquals(secondMedication, service.getMedicalRecord(firstName, lastName).getMedications().get(1));
+        assertEquals(firstAllergy, service.getMedicalRecord(firstName, lastName).getAllergies().get(0));
     }
 
     @Test

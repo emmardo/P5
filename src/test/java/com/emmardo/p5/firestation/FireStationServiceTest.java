@@ -117,7 +117,7 @@ public class FireStationServiceTest {
         List<FireStation> stations = fireStationService.getAllFireStations();
 
         //Assert
-        assertEquals(2, fireStationService.getAllFireStations().size());
+        assertEquals(2, stations.size());
     }
 
     @Test
@@ -140,7 +140,7 @@ public class FireStationServiceTest {
         FireStation result = fireStationService.getFireStation(nonExistentAddress);
 
         //Assert
-        assertNull(fireStationService.getFireStation(nonExistentAddress));
+        assertNull(result);
     }
 
     @Test

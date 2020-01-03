@@ -5,7 +5,6 @@ import com.emmardo.p5.medicalrecord.MedicalRecord;
 import com.emmardo.p5.person.Person;
 
 import java.util.List;
-import java.util.Map;
 
 public class JSONRepresentation {
 
@@ -37,25 +36,4 @@ public class JSONRepresentation {
     public void setMedicalrecords(List<MedicalRecord> medicalrecords) {
         this.medicalrecords = medicalrecords;
     }
-
-
-    /*String string1;
-    String string2;*//*
-    //Maps
-    private Map<String, String> strings;
-
-    public Map<String, String> getStrings() {
-        return strings;
-    }
-
-    public void setStrings(Map<String, String> strings) {
-        this.strings = strings;
-    }
-
-    //List of maps
-    private List<Map> maps;
-
-    public List<Map> getMaps() {return maps;}
-
-    public void setMaps(List<Map> maps) {this.maps = maps; }*/
 }

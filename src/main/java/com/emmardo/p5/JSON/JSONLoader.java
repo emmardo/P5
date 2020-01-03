@@ -1,6 +1,5 @@
 package com.emmardo.p5.JSON;
 
-
 import com.emmardo.p5.firestation.FireStation;
 import com.emmardo.p5.firestation.FireStationRepository;
 import com.emmardo.p5.medicalrecord.MedicalRecord;

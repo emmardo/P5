@@ -144,7 +144,8 @@ public class PersonService {
         List<String> emails = new ArrayList<>();
 
         if(personRepository.findAll().stream().anyMatch(p -> p.getCity().equals(city))) {
-            List<Person> list = getAllPersons();
+
+            List<Person> list = personRepository.findAll().stream().filter(p -> p.getCity().equals(city)).collect(Collectors.toList());
 
             for (Person person : list) {
 

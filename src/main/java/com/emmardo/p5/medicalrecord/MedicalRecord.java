@@ -49,7 +49,11 @@ public class MedicalRecord {
 
     public List<String> getMedications() { return medications; }
 
-    public void setMedications(List<String> medicationsList) { medications.addAll(medicationsList); }
+    public void setMedications(List<String> medicationsList) {
+
+        medications.clear();
+
+        medications.addAll(medicationsList); }
 
 
     public String getMedication(String medication) {
@@ -63,7 +67,10 @@ public class MedicalRecord {
 
     public List<String> getAllergies() { return allergies; }
 
-    public void setAllergies(List<String> allergiesList){ allergies.addAll(allergiesList); }
+    public void setAllergies(List<String> allergiesList){
+
+        allergies.clear();
+        allergies.addAll(allergiesList); }
 
 
     public String getAllergy(String allergy) {

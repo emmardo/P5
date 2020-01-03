@@ -5,6 +5,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -18,19 +19,21 @@ public class PersonController {
     @GetMapping("/persons")
     public List<Person> getAllPersons() {
 
-        logger.info("getAllPersons() called");
+        logger.info("GET /persons request made");
         return personService.getAllPersons();
     }
 
     @GetMapping("/person")
     public Person getPerson(@RequestParam String firstName, @RequestParam String lastName) {
 
+        logger.info("GET /person request made with the parameters " + firstName + " and " + lastName);
+
         if(personService.getAllPersons().stream().anyMatch(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))) {
 
-            logger.info("getPerson() called");
+            logger.info("GET /person request SUCCESSFUL");
         }else{
 
-            logger.error("getPerson() ERROR");
+            logger.error("GET /person request ERROR");
         }
 
         return personService.getPerson(firstName, lastName);
@@ -39,12 +42,14 @@ public class PersonController {
     @PostMapping("/person")
     public void createPerson(@RequestBody Person person) {
 
+        logger.info("POST /person request made with a person of details " + person.getFirstName() + ", " + person.getLastName() + ", " + person.getAddress() + ", " + person.getCity() + ", " + person.getZip() + ", " + person.getPhone() + " and " + person.getEmail());
+
         if(personService.getAllPersons().stream().noneMatch(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName()))) {
 
-            logger.info("createPerson() called");
+            logger.info("POST /person request SUCCESSFUL");
         }else{
 
-            logger.error("createPerson() ERROR");
+            logger.error("POST /person request ERROR");
         }
 
        personService.createPerson(person);
@@ -53,12 +58,14 @@ public class PersonController {
     @PutMapping("/person")
     public void updatePerson(@RequestBody Person person) {
 
+        logger.info("PUT /person request made with a person of details " + person.getFirstName() + ", " + person.getLastName() + ", " + person.getAddress() + ", " + person.getCity() + ", " + person.getZip() + ", " + person.getPhone() + " and " + person.getEmail());
+
         if(personService.getAllPersons().stream().anyMatch(p -> p.getFirstName().equals(person.getFirstName()) && p.getLastName().equals(person.getLastName()))) {
 
-            logger.info("updatePerson() called");
+            logger.info("PUT /person request SUCCESSFUL");
         }else{
 
-            logger.error("updatePerson() ERROR");
+            logger.error("PUT /person request ERROR");
         }
 
         personService.updatePerson(person);
@@ -68,12 +75,14 @@ public class PersonController {
     @DeleteMapping("/person")
     public void deleteAPerson(@RequestParam String firstName, @RequestParam String lastName) {
 
+        logger.info("DELETE /person request made with the parameters " + firstName + " and " + lastName);
+
         if(personService.getAllPersons().stream().anyMatch(p -> p.getFirstName().equals(firstName) && p.getLastName().equals(lastName))) {
 
-            logger.info("deleteAPerson() called");
+            logger.info("DELETE /person request SUCCESSFUL");
         }else{
 
-            logger.error("deleteAPerson() ERROR");
+            logger.error("DELETE /person request ERROR");
         }
 
         personService.deletePerson(firstName, lastName);
@@ -82,12 +91,14 @@ public class PersonController {
     @GetMapping("/communityEmail")
     public List<String> getEmailsFromPersonsInCity(@RequestParam String city) {
 
+        logger.info("GET /communityEmail request made with the parameter " + city);
+
         if(personService.getAllPersons().stream().anyMatch(p -> p.getCity().equals(city))) {
 
-            logger.info("/communityEmail called");
+            logger.info("GET /communityEmail request SUCCESSFUL");
         }else{
 
-            logger.error("/communityEmail ERROR");
+            logger.error("GET /communityEmail request ERROR");
         }
 
         return personService.getEmailsByCity(city);

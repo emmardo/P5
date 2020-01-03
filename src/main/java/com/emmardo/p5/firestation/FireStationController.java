@@ -6,6 +6,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,19 +26,21 @@ public class FireStationController {
     @GetMapping("/FireStations")
     public List<FireStation> getAllFireStations() {
 
-        logger.info("getAllFireStations() called");
+        logger.info("GET /FireStations request made");
         return fireStationService.getAllFireStations();
     }
 
     @GetMapping("/FireStation")
     public FireStation getFireStation(@RequestParam String address) {
 
+        logger.info("GET /FireStation request made with the parameter " + address);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getAddress().equals(address))) {
 
-            logger.info("getFireStation() called");
+            logger.info("GET /FireStation request SUCCESSFUL");
         }else{
 
-            logger.error("getFireStation() ERROR");
+            logger.error("GET /FireStation request ERROR");
         }
 
         return fireStationService.getFireStation(address);
@@ -46,12 +49,14 @@ public class FireStationController {
     @PostMapping("/FireStation")
     public void createFireStation(@RequestBody FireStation fireStation) {
 
+        logger.info("POST /FireStation request made with the a Fire Station of details " + fireStation.getAddress() + " and " + fireStation.getStation());
+
         if(fireStationService.getAllFireStations().stream().noneMatch(fs -> fs.getAddress().equals(fireStation.getAddress()))) {
 
-            logger.info("createFireStation() called");
+            logger.info("POST /FireStation request SUCCESSFUL");
         }else{
 
-            logger.error("createFireStation() ERROR");
+            logger.error("POST /FireStation request ERROR");
         }
 
         fireStationService.createFireStation(fireStation);
@@ -60,12 +65,14 @@ public class FireStationController {
     @PutMapping("/FireStation")
     public void updateFireStationNumber(@RequestBody FireStation fireStation) {
 
+        logger.info("PUT /FireStation request made with the a Fire Station of details " + fireStation.getAddress() + " and " + fireStation.getStation());
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getAddress().equals(fireStation.getAddress()))) {
 
-            logger.info("updateFireStationNumber() called");
+            logger.info("PUT /FireStation request SUCCESSFUL");
         }else{
 
-            logger.error("updateFireStationNumber() ERROR");
+            logger.error("PUT /FireStation request ERROR");
         }
 
         fireStationService.updateStation(fireStation);
@@ -74,12 +81,14 @@ public class FireStationController {
     @DeleteMapping("/FireStation")
     public void deleteFireStation(@RequestParam String address) {
 
+        logger.info("DELETE /FireStation request made with the parameter " + address);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getAddress().equals(address))) {
 
-            logger.info("deleteFireStation() called");
+            logger.info("DELETE /FireStation request SUCCESSFUL");
         }else{
 
-            logger.error("deleteFireStation() ERROR");
+            logger.error("DELETE /FireStation request ERROR");
         }
 
         fireStationService.deleteStation(address);
@@ -88,12 +97,14 @@ public class FireStationController {
     @GetMapping("/firestation")
     public List<Person> adultsAndChildrenServicedByFireStation(@RequestParam String stationNumber) {
 
+        logger.info("GET /firestation request made with the parameter " + stationNumber);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getStation().equals(stationNumber))) {
 
-            logger.info("/firestation called");
+            logger.info("GET /firestation request SUCCESSFUL");
         }else{
 
-            logger.error("/firestation ERROR");
+            logger.error("GET /firestation request ERROR");
         }
 
         return fireStationService.getAdultsAndChildrenServicedByFireStation(stationNumber);
@@ -102,12 +113,14 @@ public class FireStationController {
     @GetMapping("/phoneAlert")
     public List<String> getPhonesByStation(@RequestParam String firestation) {
 
+        logger.info("GET /phoneAlert request made with the parameter " + firestation);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getStation().equals(firestation))) {
 
-            logger.info("/phoneAlert called");
+            logger.info("GET /phoneAlert request SUCCESSFUL");
         }else{
 
-            logger.error("/phoneAlert ERROR");
+            logger.error("GET /phoneAlert request ERROR");
         }
 
         return fireStationService.getPhonesByStation(firestation);
@@ -116,28 +129,30 @@ public class FireStationController {
     @GetMapping("/fire")
     public HashMap<String, List<Person>> getFireStationAndPersonsByAddress(@RequestParam String address) {
 
+        logger.info("GET /fire request made with the parameter " + address);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getAddress().equals(address))) {
 
-            logger.info("/fire called");
+            logger.info("GET /fire request SUCCESSFUL");
         }else{
 
-            logger.error("/fire ERROR");
+            logger.error("GET /fire request ERROR");
         }
 
         return fireStationService.getFireStationAndPersonsByAddress(address);
     }
 
-    //CHECK!!!
     @GetMapping("/flood/stations")
     public HashMap<String, List<Person>> getHouseholdsCoveredByStations(@RequestParam List<String> stations) {
 
+        logger.info("GET /flood/stations request made with the parameters " + Arrays.toString(stations.toArray()));
 
         if(stations.stream().anyMatch(sn -> sn.equals(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getStation().equals(sn))))) {
 
-            logger.info("/flood/stations called");
+            logger.info("GET /flood/stations request SUCCESSFUL");
         }else{
 
-            logger.error("/flood/stations ERROR");
+            logger.error("GET /flood/stations request ERROR");
         }
 
         return fireStationService.getHouseholdsCoveredByStations(stations);
@@ -146,12 +161,14 @@ public class FireStationController {
     @GetMapping("/personInfo")
     public Person getPersonsInformation(@RequestParam String firstName, @RequestParam String lastName) {
 
+        logger.info("GET /personInfo request made with the parameters " + firstName + " and " + lastName);
+
         if(!fireStationService.getPersonsInformation(firstName, lastName).getFirstName().isEmpty()) {
 
-            logger.info("/personInfo called");
+            logger.info("GET /personInfo request SUCCESSFUL");
         }else{
 
-            logger.error("/personInfo ERROR");
+            logger.error("GET /personInfo request ERROR");
         }
 
         return fireStationService.getPersonsInformation(firstName, lastName);
@@ -160,12 +177,14 @@ public class FireStationController {
     @GetMapping("/childAlert")
     public List<Person> getChildrenLivingAtAddressAsWellAsAnyAdult(@RequestParam String address) {
 
+        logger.info("GET /childAlert request made with the parameter " + address);
+
         if(fireStationService.getAllFireStations().stream().anyMatch(fs -> fs.getAddress().equals(address))) {
 
-            logger.info("/childAlert called");
+            logger.info("GET /childAlert request SUCCESSFUL");
         }else{
 
-            logger.error("/childAlert ERROR");
+            logger.error("GET /childAlert request ERROR");
         }
 
         return fireStationService.getChildrenLivingAtAddressAsWellAsAnyAdult(address);
